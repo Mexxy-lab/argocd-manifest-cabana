@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         IMAGE = 'pumejlab/cabana'
-        DOCKERTAG = '$BUILD_NUMBER'
+
         // Define DOCKERTAG with your desired value
     }
 
