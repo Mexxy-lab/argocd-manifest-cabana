@@ -1,0 +1,44 @@
+#deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cabana-deployment
+  namespace: default
+  labels:
+    app: cabana-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cabana-app
+      tier: frontend
+      version: 1.0.0
+  #pod tempalte
+  template:
+    metadata:
+      labels:
+        app: cabana-app
+        tier: frontend
+        version: 1.0.0
+    spec: # Pod spec
+      containers:
+        - name: cabana-container
+          image: pumejlab/cabana:latest
+          ports:
+            - containerPort: 3000
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cabana-service
+  labels:
+    app: cabana-app
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 3000
+  selector:
+    app: cabana-app
