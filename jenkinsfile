@@ -3,7 +3,8 @@ pipeline {
 
     environment {
         IMAGE = 'pumejlab/cabana'
-        DOCKERTAG = '1' // Define DOCKERTAG with your desired value
+        DOCKERTAG = env.BUILD_NUMBER
+        // Define DOCKERTAG with your desired value
     }
 
     stages {
