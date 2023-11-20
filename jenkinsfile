@@ -18,7 +18,7 @@ pipeline {
             steps {
                 script {
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                        withCredentials([usernamePassword(credentialsId: 'pumej-git_token', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                        withCredentials([usernamePassword(credentialsId: 'pumej-gitpasswd', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                             sh "git config user.email pumej1985@gmail.com"
                             sh "git config user.name Mexxy-lab"
                             sh "cat deployment.yml"
@@ -26,7 +26,7 @@ pipeline {
                             sh "cat deployment.yml"
                             sh "git add ."
                             sh "git commit -m 'Done by Jenkins Job changemanifest: ${env.BUILD_NUMBER}'"
-                            sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Mexxy-lab/argocd-manifest-cabana.git HEAD:main"
+                            sh 'git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Mexxy-lab/argocd-manifest-cabana.git HEAD:main'
                         }
                     }
                 }
