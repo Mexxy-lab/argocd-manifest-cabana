@@ -23,7 +23,7 @@ spec:
     spec: # Pod spec
       containers:
         - name: cabana-container
-          image: pumejlab/cabana:12
+          image: pumejlab/cabana:latest
           ports:
             - containerPort: 3000
 
