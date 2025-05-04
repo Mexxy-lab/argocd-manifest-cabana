@@ -2,9 +2,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE = 'pumejlab/cabana'
-
-        // Define DOCKERTAG with your desired value
+        env.IMAGE = 'pumejlab/cabana'
     }
 
     stages {
