@@ -1,0 +1,82 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-prod
+  # annotations:
+  #    cert-manager.io/issuer: letsencrypt-nginx
+spec:
+  tls:
+  - hosts:
+    # - amazon.pumej.com
+    - localhost
+    # secretName: letsencrypt-nginx
+  rules:
+    - host: localhost
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: amazon-service
+                port:
+                  number: 80
+  ingressClassName: nginx
+
+# kubectl apply -f ingress.yml -n default	   
+
+## Used for a domain valid website 
+# ---
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: ingress-prod
+#   namespace: default
+#   annotations:
+#     cert-manager.io/issuer: letsencrypt-nginx
+# spec:
+#   ingressClassName: nginx
+#   tls:
+#     - hosts:
+#         - amazon.pumej.com
+#       secretName: my-app-tls   # <-- Match the Certificate secretName!
+#   rules:
+#     - host: amazon.pumej.com
+#       http:
+#         paths:
+#           - path: /
+#             pathType: Prefix
+#             backend:
+#               service:
+#                 name: amazon-service
+#                 port:
+#                   number: 80
+
+## Used for local host or self-signed issuer
+# ---
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: amazon-app-ingress
+#   namespace: default
+#   annotations:
+#     cert-manager.io/cluster-issuer: selfsigned-cluster-issuer
+#     nginx.ingress.kubernetes.io/ssl-redirect: "true"
+# spec:
+#   tls:
+#     - hosts:
+#         - amazon.local
+#       secretName: amazon-app-tls
+#   rules:
+#     - host: amazon.local
+#       http:
+#         paths:
+#           - path: /
+#             pathType: Prefix
+#             backend:
+#               service:
+#                 name: amazon-service
+#                 port:
+#                   number: 80
+
