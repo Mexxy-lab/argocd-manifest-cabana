@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        env.IMAGE = 'pumejlab/cabana'
+        IMAGE = 'pumejlab/cabana'
     }
 
     stages {
@@ -20,7 +20,7 @@ pipeline {
                             sh "git config user.email pumej1985@gmail.com"
                             sh "git config user.name Mexxy-lab"
                             sh "cat deployment.yml"
-                            sh "sed -i 's+${IMAGE}.*+${IMAGE}:${DOCKERTAG}+g' deployment.yml"
+                            sh "sed -i 's+${env.IMAGE}.*+${env.IMAGE}:${env.DOCKERTAG}+g' deployment.yml"
                             sh "cat deployment.yml"
                             sh "git add ."
                             sh "git commit -m 'Done by Jenkins Job changemanifest: ${env.BUILD_NUMBER}'"
