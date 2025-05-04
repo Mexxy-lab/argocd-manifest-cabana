@@ -23,7 +23,7 @@ spec:
     spec: # Pod spec
       containers:
         - name: cabana-container
-          image: pumejlab/cabana:2
+          image: 598189530267.dkr.ecr.ap-south-1.amazonaws.com/pumejcabana:latest
           ports:
             - containerPort: 3000
           resources:
